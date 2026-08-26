@@ -4,48 +4,720 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yoichi Isagi Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 3px solid #00d4ff;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: text-shadow 0.3s;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px #00d4ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links button:hover,
+        .nav-links button.active {
+            color: #00d4ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ffd60a;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #ffd60a;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e0e0e0;
+        }
+
+        .quick-info {
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .toggle-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .toggle-btn:hover {
+            background: linear-gradient(135deg, #0099cc, #0084b4);
+            transform: translateY(-2px);
+        }
+
+        .info-details p {
+            margin: 0.8rem 0;
+            padding: 0.8rem;
+            background: #f0f0f0;
+            border-left: 4px solid #00d4ff;
+            padding-left: 1rem;
+            color: #333;
+            border-radius: 3px;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #00d4ff;
+            padding-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .section h3 {
+            color: #2a5298;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .toggle-section {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid #00d4ff;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .toggle-section:nth-child(odd) {
+            border-color: #ff006e;
+        }
+
+        .toggle-section:nth-child(even) {
+            border-color: #ffd60a;
+        }
+
+        .toggle-section:hover {
+            background: #f0f8ff;
+            transform: translateX(5px);
+        }
+
+        .toggle-section strong {
+            color: #1e3c72;
+            display: block;
+            font-weight: 600;
+        }
+
+        .toggle-section:nth-child(odd) strong {
+            color: #ff006e;
+        }
+
+        .toggle-section:nth-child(even) strong {
+            color: #ffd60a;
+        }
+
+        .toggle-section-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border-top: 4px solid;
+        }
+
+        .stat-card:nth-child(3n+1) {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border-top-color: #00d4ff;
+        }
+
+        .stat-card:nth-child(3n+2) {
+            background: linear-gradient(135deg, #ff006e 0%, #d00050 100%);
+            border-top-color: #ff006e;
+        }
+
+        .stat-card:nth-child(3n) {
+            background: linear-gradient(135deg, #ffd60a 0%, #f5c30c 100%);
+            color: #222;
+            border-top-color: #ffd60a;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .stat-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .abilities-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .abilities-list li {
+            background: #f0f0f0;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid;
+            border-radius: 3px;
+            color: #333;
+        }
+
+        .abilities-list li:nth-child(3n+1) {
+            border-left-color: #00d4ff;
+        }
+
+        .abilities-list li:nth-child(3n+2) {
+            border-left-color: #ff006e;
+        }
+
+        .abilities-list li:nth-child(3n) {
+            border-left-color: #ffd60a;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .link-btn {
+            display: inline-block;
+            color: white;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .link-btn:nth-child(3n+1) {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        }
+
+        .link-btn:nth-child(3n+2) {
+            background: linear-gradient(135deg, #ff006e 0%, #d00050 100%);
+        }
+
+        .link-btn:nth-child(3n) {
+            background: linear-gradient(135deg, #ffd60a 0%, #f5c30c 100%);
+            color: #222;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: 2rem;
+            border-top: 2px solid #00d4ff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links button {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <h1 class="logo">Isagi</h1>
+            <h1 class="logo" onclick="showPage('home')">Isagi</h1>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="biography.html">Biography</a></li>
-                <li><a href="stats.html">Stats</a></li>
-                <li><a href="abilities.html">Abilities</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="links.html">Links</a></li>
+                <li><button class="nav-btn active" onclick="showPage('home')">Home</button></li>
+                <li><button class="nav-btn" onclick="showPage('biography')">Biography</button></li>
+                <li><button class="nav-btn" onclick="showPage('stats')">Stats</button></li>
+                <li><button class="nav-btn" onclick="showPage('abilities')">Abilities</button></li>
+                <li><button class="nav-btn" onclick="showPage('gallery')">Gallery</button></li>
+                <li><button class="nav-btn" onclick="showPage('links')">Links</button></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <section class="hero">
-            <div class="hero-content">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
                 <h2>Yoichi Isagi</h2>
                 <p class="subtitle">Master Striker | Blue Lock Protagonist</p>
-                <p class="description">The visionary player with the ultimate weapon in soccer: the Weapon called Spatial Awareness</p>
-            </div>
-        </section>
+                <p class="description">The visionary player with the ultimate weapon in soccer: Spatial Awareness</p>
+            </section>
 
-        <section class="quick-info">
-            <div class="info-card">
-                <h3>Quick Facts</h3>
-                <button class="toggle-btn" onclick="toggleInfo()">▼ Show Details</button>
-                <div id="info-details" class="info-details" style="display:none;">
-                    <p><strong>Age:</strong> 17-18 years old</p>
-                    <p><strong>Height:</strong> 5'9" (175 cm)</p>
-                    <p><strong>Position:</strong> Striker</p>
-                    <p><strong>Jersey Number:</strong> 10</p>
-                    <p><strong>Team:</strong> Ubers / Japan National Team</p>
-                    <p><strong>Anime:</strong> Blue Lock</p>
+            <section class="quick-info">
+                <div class="info-card">
+                    <h3>Quick Facts</h3>
+                    <button class="toggle-btn" onclick="toggleInfo()">▼ Show Details</button>
+                    <div id="info-details" class="info-details" style="display:none;">
+                        <p><strong>Age:</strong> 17-18 years old</p>
+                        <p><strong>Height:</strong> 5'9" (175 cm)</p>
+                        <p><strong>Position:</strong> Striker</p>
+                        <p><strong>Jersey Number:</strong> 10</p>
+                        <p><strong>Team:</strong> Ubers / Japan National Team</p>
+                        <p><strong>Anime:</strong> Blue Lock</p>
+                        <p><strong>Manga Author:</strong> Muneyuki Kaneshiro & Yusuke Nomura</p>
+                        <p><strong>Debut:</strong> 2018 (Manga), 2022 (Anime)</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
+        <!-- BIOGRAPHY PAGE -->
+        <div id="biography" class="page">
+            <section class="section">
+                <h2>Biography</h2>
+                
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Early Life & Entry to Blue Lock</strong>
+                    <div class="toggle-section-content">
+                        <p>Yoichi Isagi is a high school soccer player who was selected to participate in Blue Lock, a controversial program designed to create the world's greatest striker. Despite initial rejection from the Japanese national team scouts, Isagi's unique spatial awareness and killer instinct caught the attention of the program's creator, Jinpachi Ego.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Blue Lock Arc</strong>
+                    <div class="toggle-section-content">
+                        <p>Throughout the Blue Lock program, Isagi competes against elite strikers from across Japan. He progressively refines his weapon through various stages, overcoming opponents like Rin Itoshi, Sae Itoshi, and others. His journey through the facility showcases his rapid growth and adaptation as a striker.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Development of Weapons</strong>
+                    <div class="toggle-section-content">
+                        <p>Isagi's primary weapon is his extraordinary spatial awareness, which allows him to perceive and manipulate the soccer field in ways others cannot. He combines this with: precision striking, ball control, tactical intelligence, and the ability to adapt his playstyle based on opponents. His weapons evolve as he gains experience.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ National Team & Evolution</strong>
+                    <div class="toggle-section-content">
+                        <p>After Blue Lock, Isagi joins the Japanese national team as a key player. He faces international competitors and continues to refine his abilities. His evolution as a striker becomes more profound, developing new strategic approaches and understanding of the game at higher levels.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- STATS PAGE -->
+        <div id="stats" class="page">
+            <section class="section">
+                <h2>Player Statistics</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Strength</h4>
+                        <div class="stat-value">8.5/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Speed</h4>
+                        <div class="stat-value">8/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Technical Skill</h4>
+                        <div class="stat-value">9/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Soccer IQ</h4>
+                        <div class="stat-value">9.5/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Shot Accuracy</h4>
+                        <div class="stat-value">9/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Spatial Awareness</h4>
+                        <div class="stat-value">10/10</div>
+                    </div>
+                </div>
+
+                <h3>Career Highlights</h3>
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Blue Lock Performance</strong>
+                    <div class="toggle-section-content">
+                        <p>• Selected as one of 300 strikers in Blue Lock<br>
+                        • Progressed through multiple stages of elimination<br>
+                        • Defeated numerous elite strikers<br>
+                        • Graduated from Blue Lock as a top-tier striker<br>
+                        • Recognized as one of the best prospects in Japan</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ International Career</strong>
+                    <div class="toggle-section-content">
+                        <p>• Selected for Japanese National Team<br>
+                        • Competed in international tournaments<br>
+                        • Faced world-class defenders and goalkeepers<br>
+                        • Key player in Japan's offensive strategy<br>
+                        • Continuous improvement and development</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ABILITIES PAGE -->
+        <div id="abilities" class="page">
+            <section class="section">
+                <h2>Special Abilities & Weapons</h2>
+                
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Spatial Awareness (Main Weapon)</strong>
+                    <div class="toggle-section-content">
+                        <p>Isagi's most distinctive ability. He can perceive and manipulate space on the soccer field in extraordinary ways. This allows him to:</p>
+                        <ul class="abilities-list">
+                            <li>Visualize optimal positioning and player movement</li>
+                            <li>Predict opponent actions before they happen</li>
+                            <li>Find gaps in defensive formations</li>
+                            <li>Execute unpredictable passes and shots</li>
+                            <li>Read the game at a macro level</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Metavision</strong>
+                    <div class="toggle-section-content">
+                        <p>An advanced evolution of his spatial awareness that allows him to see beyond the immediate field. He can coordinate with teammates by understanding their positioning and intentions, making him an exceptional playmaker and striker.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Direct Shot Technique</strong>
+                    <div class="toggle-section-content">
+                        <p>Isagi possesses remarkable accuracy and power in his shots. He can:</p>
+                        <ul class="abilities-list">
+                            <li>Place shots with extreme precision</li>
+                            <li>Shoot with significant power and curve</li>
+                            <li>Take shots from unexpected angles</li>
+                            <li>Chip shots over goalkeepers</li>
+                            <li>Adapt his shooting style mid-game</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Ball Control & First Touch</strong>
+                    <div class="toggle-section-content">
+                        <p>Elite-level ball control allowing Isagi to receive difficult passes, maintain possession under pressure, and execute complex dribbling sequences when needed.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Tactical Intelligence</strong>
+                    <div class="toggle-section-content">
+                        <p>Beyond his physical abilities, Isagi possesses exceptional soccer intelligence. He can:</p>
+                        <ul class="abilities-list">
+                            <li>Analyze opponent tactics quickly</li>
+                            <li>Adapt his playstyle in real-time</li>
+                            <li>Understand complex team strategies</li>
+                            <li>Make split-second decisions</li>
+                            <li>Learn from every match and opponent</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GALLERY PAGE -->
+        <div id="gallery" class="page">
+            <section class="section">
+                <h2>Photo Gallery & Media</h2>
+                
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Character Official Art</strong>
+                    <div class="toggle-section-content">
+                        <p>Official artwork and character designs from the Blue Lock manga and anime series.</p>
+                        <p style="margin-top: 1rem; color: #666;">• Manga illustrations by Muneyuki Kaneshiro & Yusuke Nomura<br>
+                        • Anime character designs by CloverWorks Studio<br>
+                        • Official promotional images from Shonen Jump</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Anime Screenshots</strong>
+                    <div class="toggle-section-content">
+                        <p>High-quality screenshots from the Blue Lock anime series.</p>
+                        <p style="margin-top: 1rem; color: #666;">• Season 1 & 2 episodes<br>
+                        • Match moments and special abilities visualization<br>
+                        • Character interactions and key scenes</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Action Moments</strong>
+                    <div class="toggle-section-content">
+                        <p>Epic moments from matches and competitions.</p>
+                        <p style="margin-top: 1rem; color: #666;">• Scoring goals<br>
+                        • Strategic plays and formations<br>
+                        • Intense match moments<br>
+                        • Celebration and victory poses</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <strong>▼ Character Development</strong>
+                    <div class="toggle-section-content">
+                        <p>Visual progression showing Isagi's growth throughout the series.</p>
+                        <p style="margin-top: 1rem; color: #666;">• Early Blue Lock designs<br>
+                        • Mid-series evolution<br>
+                        • National team uniform<br>
+                        • Different outfit variations</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LINKS PAGE -->
+        <div id="links" class="page">
+            <section class="section">
+                <h2>Related Links & Resources</h2>
+                
+                <h3>Official Sources</h3>
+                <div class="links-grid">
+                    <a href="https://www.shonenjump.com/" target="_blank" class="link-btn">Shonen Jump</a>
+                    <a href="https://bluelock-official.jp/" target="_blank" class="link-btn">Blue Lock Official</a>
+                    <a href="https://cloverworks.co.jp/" target="_blank" class="link-btn">CloverWorks Studio</a>
+                </div>
+
+                <h3>Streaming & Watch</h3>
+                <div class="links-grid">
+                    <a href="https://www.netflix.com/" target="_blank" class="link-btn">Netflix</a>
+                    <a href="https://www.crunchyroll.com/" target="_blank" class="link-btn">Crunchyroll</a>
+                    <a href="https://www.hulu.com/" target="_blank" class="link-btn">Hulu</a>
+                </div>
+
+                <h3>Manga & Reading</h3>
+                <div class="links-grid">
+                    <a href="https://www.viz.com/" target="_blank" class="link-btn">VIZ Media</a>
+                    <a href="https://www.mangaplus.shueisha.co.jp/" target="_blank" class="link-btn">MangaPlus</a>
+                    <a href="https://www.webtoons.com/" target="_blank" class="link-btn">Webtoons</a>
+                </div>
+
+                <h3>Community & Discussion</h3>
+                <div class="links-grid">
+                    <a href="https://www.reddit.com/r/BlueLight/" target="_blank" class="link-btn">Reddit - Blue Lock</a>
+                    <a href="https://www.twitter.com/" target="_blank" class="link-btn">Twitter/X</a>
+                    <a href="https://www.instagram.com/" target="_blank" class="link-btn">Instagram</a>
+                </div>
+
+                <h3>Merchandise & Shop</h3>
+                <div class="links-grid">
+                    <a href="https://www.amazon.com/" target="_blank" class="link-btn">Amazon</a>
+                    <a href="https://www.crunchyroll.com/store" target="_blank" class="link-btn">Crunchyroll Store</a>
+                    <a href="https://www.ebay.com/" target="_blank" class="link-btn">eBay</a>
+                </div>
+
+                <h3>Other Resources</h3>
+                <div class="links-grid">
+                    <a href="https://www.imdb.com/" target="_blank" class="link-btn">IMDb</a>
+                    <a href="https://myanimelist.net/" target="_blank" class="link-btn">MyAnimeList</a>
+                    <a href="https://www.fandom.com/wiki/Blue_Lock" target="_blank" class="link-btn">Wiki</a>
+                </div>
+            </section>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2024 Yoichi Isagi Profile | Blue Lock Series</p>
+        <p>Powered by HTML, CSS & JavaScript</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav button
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleInfo() {
+            const details = document.getElementById('info-details');
+            const btn = event.target;
+            
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                btn.textContent = '▲ Hide Details';
+            } else {
+                details.style.display = 'none';
+                btn.textContent = '▼ Show Details';
+            }
+        }
+
+        function toggleContent(element) {
+            const content = element.querySelector('.toggle-section-content');
+            const header = element.querySelector('strong');
+            
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'block';
+                header.textContent = header.textContent.replace('▼', '▲');
+            } else {
+                content.style.display = 'none';
+                header.textContent = header.textContent.replace('▲', '▼');
+            }
+        }
+    </script>
 </body>
 </html>
